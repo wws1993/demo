@@ -1,6 +1,6 @@
 {
   "name": "@scm/applet-customer-v2",
-  "version": "0.0.189",
+  "version": "0.0.304",
   "description": "宅急送·货主小程序V2",
   "main": "index.js",
   "scripts": {
