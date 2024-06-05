@@ -13,7 +13,8 @@
     "moduleResolution": "node",
     "noEmitOnError": false,
     "types": [
-      "miniprogram-api-typings"
+      "miniprogram-api-typings",
+      "@types/bun"
     ],
     "paths": {
       "@vant/weapp/*": [
