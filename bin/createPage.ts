@@ -9,17 +9,20 @@ import { consola as logger } from 'consola'
   // 读取文件夹下内容
   const files = readdirSync(`./bin/template/page`);
 
-  mkdirSync(`./src/pages/${PageName}`)
+  mkdirSync(`./src/pages/${PageName}`, {recursive: true})
+
+  const lastName = PageName.includes('/') ? PageName.split('/').pop() : PageName
+
   files.forEach(file => {
     const [_fileName, fileType] = file.split('.')
-    const newFileName = `${PageName}.${fileType}`
+    const newFileName = `${lastName}.${fileType}`
     const metaFile = `./bin/template/page/${file}`
 
     Bun.write(`./src/pages/${PageName}/${newFileName}`, Bun.file(metaFile))
   })
 
   const appJson = await Bun.file(`./src/app.json`).json()
-  appJson.pages.push(`pages/${PageName}/${PageName}`)
+  appJson.pages.push(`pages/${PageName}/${lastName}`)
 
   Bun.write(`./src/app.json`, JSON.stringify(appJson, null, 2))
 })()
