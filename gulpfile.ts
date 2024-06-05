@@ -99,7 +99,11 @@ function sassCompile() {
     .pipe(gulpif(isDebug, debug({ title: '`sassCompile` Debug:' })))
     .pipe(postcss())
     .pipe(transformWxss())
-    .pipe(rename({extname: `.${platformHit.css}`}))
+    .pipe(
+      rename({
+        extname: `.${platformHit.css}`
+      })
+    )
     .pipe(replace('.scss', `.${platformHit.css}`))
     .pipe(gulp.dest(paths.dist.baseDir))
 }
@@ -136,7 +140,7 @@ const watchHandler = async function (type: 'changed' | 'removed' | 'add', file: 
       const tmp = file.replace('src/', 'dist/').replace(extname, `.${platformHit.css}`)
       del([tmp])
     } else {
-      await sassCompile()
+      sassCompile()
     }
   }
   // 图片文件
@@ -189,16 +193,19 @@ const watchHandler = async function (type: 'changed' | 'removed' | 'add', file: 
 // 监听文件
 function watch() {
   const watcher = gulp.watch([paths.src.baseDir, paths.tmp.imgDir], { ignored: /[\/\\]\./ })
-  watcher.on('change', function (file) {
-    log(gutil.colors.yellow(file) + ' is changed')
-    watchHandler('changed', file)
-  }).on('add', function (file) {
-    log(gutil.colors.yellow(file) + ' is added')
-    watchHandler('add', file)
-  }).on('unlink', function (file) {
-    log(gutil.colors.yellow(file) + ' is deleted')
-    watchHandler('removed', file)
-  })
+  watcher
+    .on('change', function (file) {
+      log(gutil.colors.yellow(file) + ' is changed')
+      watchHandler('changed', file)
+    })
+    .on('add', function (file) {
+      log(gutil.colors.yellow(file) + ' is added')
+      watchHandler('add', file)
+    })
+    .on('unlink', function (file) {
+      log(gutil.colors.yellow(file) + ' is deleted')
+      watchHandler('removed', file)
+    })
 }
 
 const buildTasks = [cleanTmp, copyBasicFiles, sassCompile, copyWXML, compileTsFiles]

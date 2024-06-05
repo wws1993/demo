@@ -1,13 +1,12 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/more/more",
-    "pages/demo/demo"
+    "pages/more/more"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "工程纠察平台",
+    "navigationBarTitleText": "测试APPLET",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

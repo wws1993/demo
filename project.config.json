@@ -19,10 +19,7 @@
         "packageJsonPath": "./package.json",
         "miniprogramNpmDistDir": "./dist"
       }
-    ],
-    "skylineRenderEnable": false,
-    "ignoreUploadUnusedFiles": true,
-    "useCompilerPlugins": false
+    ]
   },
   "appid": "wx6ae3d12aa0c478f9",
   "projectname": "weapp-wf",
